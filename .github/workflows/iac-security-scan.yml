@@ -1,0 +1,37 @@
+name: IaC Security Scan
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  secure-iac-gate:
+    name: Checkov scan - secure examples
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Checkov on secure Terraform
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: terraform/secure
+          framework: terraform
+          quiet: true
+
+  insecure-training-scan:
+    name: Checkov scan - insecure training examples
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Checkov on intentionally insecure Terraform
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: terraform/insecure
+          framework: terraform
+          quiet: true
