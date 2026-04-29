@@ -1,0 +1,38 @@
+[
+  {
+    "id": "FINDING-001",
+    "title": "S3 public access controls disabled",
+    "severity": "HIGH",
+    "area": "Storage",
+    "insecure_file": "terraform/insecure/main.tf",
+    "risk": "A storage bucket could be exposed publicly.",
+    "remediation": "Enable S3 Block Public Access and review bucket policies."
+  },
+  {
+    "id": "FINDING-002",
+    "title": "SSH open to the internet",
+    "severity": "HIGH",
+    "area": "Network",
+    "insecure_file": "terraform/insecure/main.tf",
+    "risk": "Attackers can attempt remote access from any public IP address.",
+    "remediation": "Restrict SSH to approved CIDR ranges or use a safer access pattern."
+  },
+  {
+    "id": "FINDING-003",
+    "title": "Wildcard IAM permissions",
+    "severity": "CRITICAL",
+    "area": "Identity",
+    "insecure_file": "terraform/insecure/main.tf",
+    "risk": "Overly broad permissions increase blast radius if credentials are compromised.",
+    "remediation": "Replace wildcard actions and resources with least-privilege permissions."
+  },
+  {
+    "id": "FINDING-004",
+    "title": "Missing storage encryption",
+    "severity": "MEDIUM",
+    "area": "Storage",
+    "insecure_file": "terraform/insecure/main.tf",
+    "risk": "Data may not meet expected protection requirements at rest.",
+    "remediation": "Enable server-side encryption for the bucket."
+  }
+]

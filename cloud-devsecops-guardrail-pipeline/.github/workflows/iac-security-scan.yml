@@ -1,0 +1,49 @@
+name: IaC Security Scan
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  secure-iac-gate:
+    name: Checkov scan - secure examples
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run Checkov on secure Terraform
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: terraform/secure
+          framework: terraform
+          quiet: true
+
+      - name: Explain secure training scan
+        run: |
+          echo "The secure examples are training code and may still produce informational findings."
+          echo "Review any findings and compare them against docs/remediation-guide.md." 
+
+  insecure-training-scan:
+    name: Checkov scan - insecure training examples
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run Checkov on intentionally insecure Terraform
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: terraform/insecure
+          framework: terraform
+          quiet: true
+
+      - name: Explain expected training findings
+        run: |
+          echo "The insecure folder is intentionally unsafe training material."
+          echo "Findings here are expected and should be used for screenshots and remediation notes."
