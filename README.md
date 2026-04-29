@@ -1,161 +1,116 @@
-# Cloud DevSecOps Guardrail Pipeline
+# Cloud DevSecOps Guardrail Pipeline (iPhone Built)
 
-A beginner-friendly, iPhone-compatible SecDevOps and cloud security portfolio project.
+This project demonstrates a complete **DevSecOps pipeline** that detects insecure cloud infrastructure before deployment using automated security guardrails.
 
-This project shows how a cloud team can use GitHub Actions as a security guardrail pipeline to scan Infrastructure as Code before cloud infrastructure is deployed.
-
-The project is designed for someone moving from DoD aviation maintenance into cloud security or SecDevOps. It connects aviation-style checklist discipline, safety controls, and pre-flight inspection habits to cloud infrastructure guardrails.
-
-> **Beginner safety note:** This project does not require you to deploy anything to AWS. The safest version runs entirely in GitHub using Terraform example files and GitHub Actions.
+Built entirely from an iPhone using GitHub + Working Copy.
 
 ---
 
-## What Problem This Solves
+## 🚀 Project Overview
 
-Cloud infrastructure can accidentally be written with insecure settings, such as:
+This pipeline enforces security checks on Terraform infrastructure by integrating:
 
-- public storage buckets
-- overly broad IAM permissions
-- open SSH from the internet
-- missing encryption
-- weak deployment review processes
-- secrets accidentally committed to code
+- Automated testing (Python + pytest)
+- Terraform validation
+- Infrastructure security scanning (Checkov)
+- Secret detection (Gitleaks)
+- Report generation with actionable remediation steps
 
-This repo simulates a security pipeline that catches those problems before deployment.
-
----
-
-## Skills Demonstrated
-
-- GitHub Actions CI/CD
-- Terraform / Infrastructure as Code
-- Cloud security misconfiguration awareness
-- Checkov Infrastructure as Code scanning
-- Secret scanning with Gitleaks
-- Terraform formatting and validation
-- IAM policy review
-- S3 public access risk
-- Security group / firewall risk
-- Remediation documentation
-- Executive reporting
-- Interview-ready project communication
+The goal is to simulate a **real-world cloud security pipeline** used in DevSecOps environments.
 
 ---
 
-## Project Structure
+## 🧠 What Problem This Solves
 
-```text
-cloud-devsecops-guardrail-pipeline/
-├── README.md
-├── START_HERE.md
-├── requirements.txt
-├── terraform/
-│   ├── insecure/
-│   └── secure/
-├── policies/
-│   ├── guardrail-rules.md
-│   └── iam-policy-examples/
-├── .github/
-│   └── workflows/
-├── src/
-├── tests/
-├── sample-data/
-├── reports/
-├── docs/
-├── demo-evidence/
-└── screenshots/
-```
+Manual cloud reviews are:
+- inconsistent
+- slow
+- error-prone
+
+This pipeline ensures:
+
+> Insecure infrastructure is detected automatically before deployment.
 
 ---
 
-## Safe Beginner Path
+## ⚙️ Tech Stack
 
-You can complete Phase 1 with only:
-
-- iPhone
-- GitHub Mobile
-- Working Copy
-- Safari
-- a-Shell
-- Files app
-
-No AWS account is required for Phase 1.
+- Python (report generation + testing)
+- Terraform (infrastructure as code)
+- GitHub Actions (CI/CD pipeline)
+- Checkov (IaC security scanning)
+- Gitleaks (secret detection)
 
 ---
 
-## Quick Start on iPhone
+## 🔄 Pipeline Flow
 
-```bash
-cd cloud-devsecops-guardrail-pipeline
-python -m pip install -r requirements.txt
-python -m pytest tests/ -v
-python src/report_builder.py
-```
-
-The report generator creates:
-
-```text
-reports/generated-guardrail-report.md
-```
+1. Developer pushes Terraform code
+2. GitHub Actions triggers workflows
+3. Pipeline runs:
+   - Python tests
+   - Terraform validation
+   - Security scans (Checkov)
+   - Secret scan (Gitleaks)
+4. Report is generated with findings + remediation
 
 ---
 
-## GitHub Actions Included
+## 📸 Demo Evidence
 
-| Workflow | Purpose |
-|---|---|
-| `terraform-validate.yml` | Checks Terraform formatting and validates Terraform syntax |
-| `iac-security-scan.yml` | Runs Checkov scans against secure and insecure training examples |
-| `secrets-scan.yml` | Runs Gitleaks secret scanning |
-| `python-report-tests.yml` | Runs Python tests for the report builder |
-| `markdown-check.yml` | Confirms key documentation files exist |
+### 🧪 Python Tests Passing
+![Tests](screenshots/python-tests.png)
 
----
+### 📊 Report Generation
+![Report CLI](screenshots/report-cli.png)
 
-## Why There Are Secure and Insecure Terraform Folders
+### 📄 Generated Report Output
+![Report Output](screenshots/report-output.png)
 
-The `terraform/insecure/` folder is intentionally bad training material. It exists so you can show that the security pipeline detects common cloud risks.
+### 🛠 Terraform Validate Workflow
+![Terraform](screenshots/terraform-validate.png)
 
-The `terraform/secure/` folder shows safer examples and should pass more security checks.
+### 🔍 IaC Security Scan (Checkov)
+![Checkov](screenshots/checkov-scan.png)
 
-This is like an aviation maintenance inspection:
+### 🔐 Secrets Scan (Gitleaks)
+![Gitleaks](screenshots/gitleaks-scan.png)
 
-```text
-Bad configuration found before operation
-↓
-Finding documented
-↓
-Remediation applied
-↓
-Safer configuration approved
-```
+### ⚙️ GitHub Actions Pipeline Runs
+![Actions](screenshots/actions-overview.png)
 
 ---
 
-## Screenshots to Add
+## 📄 Example Findings
 
-After you publish to GitHub, add screenshots to `demo-evidence/`:
+The pipeline detects issues such as:
 
-1. Repo homepage
-2. GitHub Actions workflow list
-3. Terraform validation passing
-4. Checkov scan output
-5. Gitleaks scan passing
-6. Python tests passing
-7. Generated guardrail report
-8. Remediation guide
-9. Executive summary
+- Public S3 buckets
+- Open SSH access to the internet
+- Wildcard IAM permissions
+- Missing encryption on storage
 
-Then add those images to this README.
+Each finding includes:
 
----
-
-## Resume Bullet
-
-Built a **Cloud DevSecOps Guardrail Pipeline** using GitHub Actions, Terraform, Checkov, Gitleaks, and Python reporting to scan cloud Infrastructure as Code for risky patterns such as public storage, overly broad IAM, exposed network access, and missing security controls before deployment.
+- Severity level
+- Risk explanation
+- Exact file source
+- Remediation steps
 
 ---
 
-## Interview Explanation
+## 🧠 Key Security Insight
 
-I built this project to show how my aviation maintenance background transfers into cloud security. In aviation, checklists and inspections catch problems before they become operational risk. This project applies that same mindset to cloud infrastructure. It uses GitHub Actions as a guardrail pipeline to inspect Terraform code before deployment, identify unsafe cloud patterns, and document remediation steps clearly.
+This project demonstrates how:
+
+> CI/CD pipelines can enforce security guardrails automatically, turning security from a manual process into a repeatable system.
+
+---
+
+## 🎯 Interview Talking Point
+
+“I built a DevSecOps pipeline that scans Terraform infrastructure for misconfigurations like public storage, open SSH, and overly permissive IAM before deployment, and generates actionable security reports automatically.”
+
+---
+
+## 📦 Project Structure
