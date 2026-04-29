@@ -1,0 +1,38 @@
+name: Project Health Check
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show project tree
+        run: |
+          echo "Project root:"
+          ls -la
+          echo ""
+          echo "Workflow files:"
+          ls -la .github/workflows || true
+
+      - name: Confirm critical project folders
+        run: |
+          test -d .github/workflows
+          test -d src
+          test -d tests
+          test -d terraform
+          test -d docs
+          test -d reports
+
+      - name: Confirm portfolio documentation
+        run: |
+          test -f README.md
+          test -f START_HERE.md
+          test -f docs/interview-walkthrough.md
+          test -f docs/threat-model.md
+          test -f docs/remediation-guide.md
