@@ -1,0 +1,8 @@
+title = "Cloud DevSecOps Guardrail Pipeline Gitleaks Config"
+
+[allowlist]
+description = "Allow documented fake values used for training only."
+paths = [
+  '''sample-data/security_findings.json''',
+  '''reports/sample-security-findings.md''',
+]
