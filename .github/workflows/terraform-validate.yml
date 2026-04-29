@@ -1,0 +1,32 @@
+name: Terraform Format and Validate
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  terraform-validate:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        folder:
+          - terraform/insecure
+          - terraform/secure
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform format check
+        run: terraform fmt -check -recursive terraform
+
+      - name: Terraform init
+        working-directory: ${{ matrix.folder }}
+        run: terraform init -backend=false
+
+      - name: Terraform validate
+        working-directory: ${{ matrix.folder }}
+        run: terraform validate
