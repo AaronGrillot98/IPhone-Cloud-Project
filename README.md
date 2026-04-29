@@ -114,3 +114,11 @@ This project demonstrates how:
 ---
 
 ## 📦 Project Structure
+
+github/workflows   → CI/CD pipelines
+src/                → Python report logic
+tests/              → pytest validation
+terraform/          → secure vs insecure configs
+reports/            → generated output
+docs/               → documentation
+screenshots/        → demo proof
